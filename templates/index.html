@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div class="header">
+<h1>Used Car Price Prediction</h1>
+</div>
+    <div class= 'main'>
+        <form class= 'form-design' method="post" action="#" accept-charset="utf-8">
+            <div class="form-group">
+                <input class="input-group" id="Km_driven" name="Km_driven" required="1" placeholder="Kilometer Driven">
+            </div>
+            <div class="form-group">
+                <select class="select-group" id="Fuel" name="Fuel" required="1" placeholder="Fuel Type">
+                    <option>Fuel Type</option>
+                    <option>Diesel</option>
+                    <option>Petrol</option>
+                    <option>CNG</option>
+                    <option>LPG</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="select-group" id="Seller_type" name="Seller_type" required="1" placeholder="Seller Type">
+                <option>Seller Type</option>
+                <option>Individual</option>
+                <option>Dealer</option>
+                <option>Trustmark Dealer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="select-group" id="Transmission" name="Transmission" required="1" placeholder="Transmission Type">
+                    <option>Transmission Type</option>
+                    <option>Manual</option>
+                    <option>Automatic</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="select-group" id="Owner" name="Owner" required="1" placeholder="Owner">
+                    <option>Owner</option>
+                    <option>First Owner</option>
+                    <option>Second Owner</option>
+                    <option>Third Owner</option>
+                    <option>Fourth & Above Owner</option>
+                    <option>Test Drive Car</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="input-group" id="Seats" name="Seats" required="1" placeholder="No. of Seats">
+            </div>
+            <div class="form-group">
+                <input class="input-group" id="Torque" name="Torque" required="1" placeholder="Torque">
+            </div>
+            <div class="form-group">
+                <input class="input-group" id="Mileage" name="Mileage" required="1" placeholder="Milaege">
+            </div>
+            <div class="form-group">
+                <input class="input-group" id="Engine" name="Engine" required="1" placeholder="Engine">
+            </div>
+            <div class="form-group">
+                <input class="input-group" id="Max_power" name="Max_power" required="1" placeholder="Max Power">
+            </div>
+            <button class="submit-button" type="submit" onclick="send_data()">Predict</button>
+        </form>
+    </div>
+<br>
+<div class="row">
+        <div class="col-12" style="text-align: center;">
+            <h3><span id="prediction"></span></h3>
+        </div>
+    </div>
+
+    <script class="result-grp">
+    
+        function form_handler(event) {
+            event.preventDefault(); // Don't submit the form normally
+        }
+        function send_data()
+        {
+            document.querySelector('form').addEventListener("submit",form_handler);
+    
+            var fd=new FormData(document.querySelector('form'));
+    
+            var xhr= new XMLHttpRequest({mozSystem: true});
+    
+            xhr.open('POST','/predict',true);
+            document.getElementById('prediction').innerHTML="Wait! Predicting Price.....";
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    document.getElementById('prediction').innerHTML="The Price of The car is: Tk"+xhr.responseText;
+    
+                }
+            };
+    
+            xhr.onload= function(){};
+    
+            xhr.send(fd);
+        }
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+crossorigin="anonymous"></script>
+</body>
+</html>
