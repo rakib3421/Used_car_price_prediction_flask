@@ -4,9 +4,9 @@ import numpy as np
 import pickle
 
 app = Flask(__name__)
-with open('F://New folder (2)//model.pkl', 'rb') as file:
+with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
-car=pd.read_csv('F://New folder (2)//Cleaned_data.csv')
+car=pd.read_csv('Cleaned_data.csv')
 
 @app.route('/',methods=['GET','POST'])
 
